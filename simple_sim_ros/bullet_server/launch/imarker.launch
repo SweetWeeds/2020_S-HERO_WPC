@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<launch>
+
+  <group ns="bullet_server">
+  <node pkg="bullet_server" type="ground_plane.py" name="ground_plane"
+      output="screen">
+  </node>
+
+  <node pkg="bullet_server" type="make_wall.py" name="make_wall"
+      output="screen">
+    <param name="num_x" value="12"/>
+    <param name="num_y" value="20"/>
+    <param name="margin_z" value="-0.005"/>
+  </node>
+
+  <node name="itf" pkg="rviz_interactive_tf" type="interactive_tf" ns="body_spawn">
+    <param name="parent_frame" value="map"/>
+    <param name="frame" value="spawn_frame"/>
+  </node>
+
+  <node pkg="bullet_server" type="imarker_spawn.py" name="imarker_spawn"
+      output="screen">
+    <param name="frame" value="spawn_frame"/>
+  </node>
+  </group>
+
+</launch>
