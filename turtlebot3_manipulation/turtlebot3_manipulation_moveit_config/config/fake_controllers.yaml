@@ -3,4 +3,6 @@ controller_list:
     joints:
       - joint1
       - joint2
+  - name: fake_gripper_controller
+    joints:
       - joint3

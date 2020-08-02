@@ -124,9 +124,9 @@
     </visual>
 
     <collision>
-      <origin xyz="0 0 0.03" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.133 0.133 0.009"/>
+        <mesh filename="package://turtlebot3_manipulation_description/meshes/chain_link4.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
 

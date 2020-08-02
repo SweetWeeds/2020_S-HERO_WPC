@@ -72,6 +72,10 @@ Visualization Manager:
           Value: false
         /end_effector_link:
           Value: true
+        /gripper_link:
+          Value: false
+        /gripper_link_sub:
+          Value: false
         /imu_link:
           Value: false
         /link1:
@@ -79,6 +83,10 @@ Visualization Manager:
         /link2:
           Value: false
         /link3:
+          Value: false
+        /link4:
+          Value: false
+        /link5:
           Value: false
         /odom:
           Value: true
@@ -111,7 +119,14 @@ Visualization Manager:
                 /link1:
                   /link2:
                     /link3:
-                      {}
+                      /link4:
+                        /link5:
+                          /end_effector_link:
+                            {}
+                          /gripper_link:
+                            {}
+                          /gripper_link_sub:
+                            {}
                 /wheel_left_link:
                   {}
                 /wheel_right_link:
@@ -210,6 +225,16 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        gripper_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_link_sub:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         imu_link:
           Alpha: 1
           Show Axes: false
@@ -225,6 +250,16 @@ Visualization Manager:
           Show Trail: false
           Value: true
         link3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link5:
           Alpha: 1
           Show Axes: false
           Show Trail: false

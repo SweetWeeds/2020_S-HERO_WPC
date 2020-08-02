@@ -101,6 +101,16 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        gripper_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_link_sub:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         imu_link:
           Alpha: 1
           Show Axes: false
@@ -116,6 +126,16 @@ Visualization Manager:
           Show Trail: false
           Value: true
         link3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link5:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -159,6 +179,10 @@ Visualization Manager:
           Value: true
         end_effector_link:
           Value: true
+        gripper_link:
+          Value: true
+        gripper_link_sub:
+          Value: true
         imu_link:
           Value: true
         link1:
@@ -166,6 +190,10 @@ Visualization Manager:
         link2:
           Value: true
         link3:
+          Value: true
+        link4:
+          Value: true
+        link5:
           Value: true
         wheel_left_link:
           Value: true
@@ -194,7 +222,14 @@ Visualization Manager:
             link1:
               link2:
                 link3:
-                  {}
+                  link4:
+                    link5:
+                      end_effector_link:
+                        {}
+                      gripper_link:
+                        {}
+                      gripper_link_sub:
+                        {}
             wheel_left_link:
               {}
             wheel_right_link:
