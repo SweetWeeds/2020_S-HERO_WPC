@@ -72,8 +72,14 @@ def dijkstra(graph, s):
         
     return d, pi
 
-# s: start point
-# t: target point
+"""
+    shortest_path
+    input:
+        s: start node ID
+        t: target node ID
+    output:
+        path: path list
+"""
 def shortest_path(s, t):
     d, pi = dijkstra(g, s)
     path = [t]
@@ -88,8 +94,9 @@ def shortest_path(s, t):
         
     if s not in path:
         return f'unable to find shortest path staring from "{s}" to "{t}"'
-    
-    return f'{" > ".join(path)}'
+    #print(path)
+    #return f'{" > ".join(path)}'
+    return path
 
 def isConnected(node1, node2, connection_data):
     for cd in connection_data:
@@ -110,22 +117,12 @@ def calcDistance(map_data, connection_data):
 
 if __name__ == "__main__":
     g = Graph(['A', 'B', 'C', 'D', 'E'])
-    path = Path(__file__).parent / "./map.json"
+    path = Path(__file__).parent / "./map.json" # for relative path
+    # Load json file (./map.json)
     with path.open() as json_stream:
         map_data, connection_data = json.load(json_stream)
         dist_data = calcDistance(map_data, connection_data)
         for n1, n2, w in dist_data:
             g.add_edge(n1, n2, w)
-        """
-        g.add_edge('A', 'B', 10)
-        g.add_edge('A', 'C', 3)
-        g.add_edge('B', 'C', 1)
-        g.add_edge('C', 'B', 4)
-        g.add_edge('B', 'D', 2)
-        g.add_edge('C', 'D', 8)
-        g.add_edge('D', 'E', 7)
-        g.add_edge('E', 'D', 9)
-        g.add_edge('C', 'E', 2)
-        """
 
     print( shortest_path('B', 'E') )
