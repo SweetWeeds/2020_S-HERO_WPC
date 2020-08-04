@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+#-*- coding: utf-8 -*-
 from collections import defaultdict
 import os
 import math
@@ -40,7 +42,8 @@ class Graph:
     def __str__(self):
         result = ''
         for v in self.V:
-            result += f'{v}: {str(self.graph[v])}, \n'
+            result += '{}: {}, \n'.format(v, str(self.graph[v]))
+            #result += f'{v}: {str(self.graph[v])}, \n'
         return result
 
 class Map:
@@ -73,7 +76,8 @@ class Map:
     def dijkstra(self, graph, s):
         Q = Pq() # priority queue of vertices
                 # [ [distance, vertex], ... ] 
-        d = dict.fromkeys(graph.V, math.inf) # distance pair 
+        #d = dict.fromkeys(graph.V, math.inf) # distance pair 
+        d = dict.fromkeys(graph.V, float('inf'))
                                             # will have default value of Infinity
         pi = dict.fromkeys(graph.V, None) # map of parent vertex
                                         # useful for finding shortest path	
@@ -99,14 +103,6 @@ class Map:
             
         return d, pi
 
-    """
-        shortest_path
-        input:
-            s: start node ID
-            t: target node ID
-        output:
-            path: path list
-    """
     def shortest_path(self, s, t):
         d, pi = self.dijkstra(self.g, s)
         path = [t]
@@ -120,11 +116,11 @@ class Map:
             current = pi[current]
             
         if s not in path:
-            return f'unable to find shortest path staring from "{s}" to "{t}"'
+            #return f'unable to find shortest path staring from "{s}" to "{t}"'
+            return 'unable to find shortest path staring from "{}" to "{}"'.format(s, t)
         #print(path)
         #return f'{" > ".join(path)}'
         return path
-
 
 
 if __name__ == "__main__":
