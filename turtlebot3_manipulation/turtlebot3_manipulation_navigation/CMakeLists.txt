@@ -22,6 +22,10 @@ find_package(catkin REQUIRED COMPONENTS
   moveit_ros_planning_interface
 )
 
+set(${PROJECT_NAME}_SRCS
+  src/node_map.cpp
+)
+
 ################################################################################
 # Setup for python modules and scripts
 ################################################################################
