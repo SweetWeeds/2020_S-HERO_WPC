@@ -18,5 +18,8 @@ public:
 };
 
 class map {
+private:
+    
+public:
 
 };

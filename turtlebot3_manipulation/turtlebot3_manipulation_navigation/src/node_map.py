@@ -2,7 +2,6 @@ from collections import defaultdict
 import os
 import math
 from heapq import heapify, heappush, heappop
-import networkx as nx
 import json
 from pathlib import Path
 
@@ -92,22 +91,29 @@ def shortest_path(s, t):
     
     return f'{" > ".join(path)}'
 
-def calcDistance(map_data):
+def isConnected(node1, node2, connection_data):
+    for cd in connection_data:
+        if ((cd[0] == node1 and cd[1] == node2) or (cd[1] == node1 and cd[0] == node2)):
+            return True
+    return False
+
+def calcDistance(map_data, connection_data):
     dist_data = list()
     for idx1, data1 in enumerate(map_data):
         for idx2, data2 in enumerate(map_data):
             if (idx1 == idx2):
                 continue
-            dist_data.append([data1[0], data2[0], math.sqrt((data1[1]-data2[1])**2 + (data1[2]-data2[2])**2)])
+            if (isConnected(data1[0], data2[0], connection_data)):
+                dist_data.append([data1[0], data2[0], math.sqrt((data1[1]-data2[1])**2 + (data1[2]-data2[2])**2)])
     return dist_data
-            
+
 
 if __name__ == "__main__":
     g = Graph(['A', 'B', 'C', 'D', 'E'])
     path = Path(__file__).parent / "./map.json"
     with path.open() as json_stream:
-        map_data = json.load(json_stream)
-        dist_data = calcDistance(map_data)
+        map_data, connection_data = json.load(json_stream)
+        dist_data = calcDistance(map_data, connection_data)
         for n1, n2, w in dist_data:
             g.add_edge(n1, n2, w)
         """
