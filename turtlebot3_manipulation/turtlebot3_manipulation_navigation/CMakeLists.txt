@@ -22,10 +22,6 @@ find_package(catkin REQUIRED COMPONENTS
   moveit_ros_planning_interface
 )
 
-set(${PROJECT_NAME}_SRCS
-  src/node_map.cpp
-)
-
 ################################################################################
 # Setup for python modules and scripts
 ################################################################################
@@ -65,6 +61,11 @@ include_directories(
 #  nodes/pick_and_place_state_machine
 #  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
+
+catkin_install_python(PROGRAMS
+  src/map_router.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 install(TARGETS 
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

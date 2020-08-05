@@ -6,9 +6,27 @@ import math
 from heapq import heapify, heappush, heappop
 import json
 from pathlib import Path
-#import rospy
-#from std_msgs.msg import String
-#from geometry_msgs.msg import PointStamped
+import rospy
+from std_msgs.msg import String
+from std_srvs.srv import Trigger, TriggerResponse
+from geometry_msgs.msg import PointStamped
+
+#
+# map.json
+# [[node_list], [node_coordinate], [node_connection]]
+# ex.
+# [
+#     [
+#         "A1", "A2", "A3", ... , "node_name"
+#     ],
+#     [
+#         ["A1", 3, 5], ["A2", 5, 5], ... ,["node_name", x, y]
+#     ],
+#     [
+#         ["A1", "A2"], ["A2", "A3"], ... , ["node_name1", "node_name2"]
+#     ]
+# ]
+#
 
 # utility: priority queue
 class Pq:
@@ -110,6 +128,8 @@ class Map:
             
         return d, pi
 
+    # s: start node's name
+    # t: target node's name
     def shortest_path(self, s, t):
         d, pi = self.dijkstra(self.g, s)
         path = [t]
@@ -133,8 +153,8 @@ class Map:
 if __name__ == "__main__":
     m = Map()
     # init ROS node
-    #rospy.init_node('node_map_router')
+    rospy.init_node('map_router')
     
     # Publishers
-    #waypoint_pub = rospy.Service('waypoint/', PointStamped, )
-    print( m.shortest_path('B1', 'A20') )
+    waypoint_pub = rospy.Service('waypoint/', PointStamped, )
+    #print( m.shortest_path('B1', 'A20') )
