@@ -6,6 +6,9 @@ import math
 from heapq import heapify, heappush, heappop
 import json
 from pathlib import Path
+#import rospy
+#from std_msgs.msg import String
+#from geometry_msgs.msg import PointStamped
 
 # utility: priority queue
 class Pq:
@@ -49,6 +52,10 @@ class Graph:
 class Map:
     def __init__(self):
         path = Path(__file__).parent / "./map.json" # for relative path
+        self.graph_data = None
+        self.map_data = None
+        self.connection_data = None
+        self.g = None
         # Load json file (./map.json)
         with path.open() as json_stream:
             self.graph_data, self.map_data, self.connection_data = json.load(json_stream)
@@ -125,4 +132,9 @@ class Map:
 
 if __name__ == "__main__":
     m = Map()
-    print( m.shortest_path('B', 'E') )
+    # init ROS node
+    #rospy.init_node('node_map_router')
+    
+    # Publishers
+    #waypoint_pub = rospy.Service('waypoint/', PointStamped, )
+    print( m.shortest_path('B1', 'A20') )
