@@ -1,0 +1,5 @@
+<launch>
+  <!-- arg name="stage" default="1"/ -->
+  <!-- param name="stage_number"  value="$(arg stage)"/ -->
+  <node pkg="turtlebot3_manipulation_navigation" type="map_router" name="map_router" output="screen" />
+</launch>

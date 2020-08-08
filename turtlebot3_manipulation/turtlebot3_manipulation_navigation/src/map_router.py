@@ -6,6 +6,27 @@ import math
 from heapq import heapify, heappush, heappop
 import json
 from pathlib import Path
+import rospy
+from std_msgs.msg import String
+from std_srvs.srv import Trigger, TriggerResponse
+from geometry_msgs.msg import PointStamped
+
+#
+# map.json
+# [[node_list], [node_coordinate], [node_connection]]
+# ex.
+# [
+#     [
+#         "A1", "A2", "A3", ... , "node_name"
+#     ],
+#     [
+#         ["A1", 3, 5], ["A2", 5, 5], ... ,["node_name", x, y]
+#     ],
+#     [
+#         ["A1", "A2"], ["A2", "A3"], ... , ["node_name1", "node_name2"]
+#     ]
+# ]
+#
 
 # utility: priority queue
 class Pq:
@@ -49,6 +70,10 @@ class Graph:
 class Map:
     def __init__(self):
         path = Path(__file__).parent / "./map.json" # for relative path
+        self.graph_data = None
+        self.map_data = None
+        self.connection_data = None
+        self.g = None
         # Load json file (./map.json)
         with path.open() as json_stream:
             self.graph_data, self.map_data, self.connection_data = json.load(json_stream)
@@ -103,6 +128,8 @@ class Map:
             
         return d, pi
 
+    # s: start node's name
+    # t: target node's name
     def shortest_path(self, s, t):
         d, pi = self.dijkstra(self.g, s)
         path = [t]
@@ -125,4 +152,9 @@ class Map:
 
 if __name__ == "__main__":
     m = Map()
-    print( m.shortest_path('B', 'E') )
+    # init ROS node
+    rospy.init_node('map_router')
+    
+    # Publishers
+    waypoint_pub = rospy.Service('waypoint/', PointStamped, )
+    #print( m.shortest_path('B1', 'A20') )
