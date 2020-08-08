@@ -80,4 +80,4 @@ install(DIRECTORY maps launch rviz
 ################################################################################
 ## Build option for the "map_router_srv" node.
 ##
-add_executable()
+#add_executable()
