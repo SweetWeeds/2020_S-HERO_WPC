@@ -22,10 +22,6 @@ find_package(catkin REQUIRED COMPONENTS
   moveit_ros_planning_interface
 )
 
-set(${PROJECT_NAME}_SRCS
-  src/node_map.cpp
-)
-
 ################################################################################
 # Setup for python modules and scripts
 ################################################################################
@@ -34,7 +30,10 @@ set(${PROJECT_NAME}_SRCS
 ################################################################################
 # Declare ROS messages, services and actions
 ################################################################################
-
+add_service_files(
+  FILES
+  SrvRoute.srv
+)
 ################################################################################
 # Declare ROS dynamic reconfigure parameters
 ################################################################################
@@ -63,6 +62,11 @@ include_directories(
 #  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
 
+catkin_install_python(PROGRAMS
+  src/map_router.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
 install(TARGETS 
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
@@ -72,5 +76,8 @@ install(DIRECTORY maps launch rviz
 )
 
 ################################################################################
-# Test
+# Executable
 ################################################################################
+## Build option for the "map_router_srv" node.
+##
+add_executable()
