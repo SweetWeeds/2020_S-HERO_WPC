@@ -29,11 +29,19 @@
     <model name="parking_lot">
       <static>true</static>
       <link name="environment_model_link">
-        <origin pose="0 0 0 0 0 0"/>
+        <origin pose="0 0 -0.001 0 0 0"/>
         <collision name="parking_lot_collision">
           <geometry>
             <mesh><uri>model://parking_lot/parking_lot.dae</uri></mesh>
           </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+            </friction>
+          </surface>
         </collision>
         <visual name="parking_lot_visual" cast_shadows="false">
           <geometry>
