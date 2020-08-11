@@ -87,7 +87,6 @@ class Graph:
         result = ''
         for v in self.V:
             result += '{}: {}, \n'.format(v, str(self.graph[v]))
-            #result += f'{v}: {str(self.graph[v])}, \n'
         return result
 
 class Map:
@@ -97,6 +96,7 @@ class Map:
         self.map_data = None
         self.connection_data = None
         self.g = None
+
         # Load json file (./map.json)
         with path.open() as json_stream:
             self.graph_data, self.map_data, self.connection_data = json.load(json_stream)
@@ -190,7 +190,7 @@ class Map:
                 nearest_node = m[0]
         return nearest_node
 
-if __name__ == "__main__":
+def main():
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
     
@@ -237,10 +237,13 @@ if __name__ == "__main__":
                 if(x == None or y == None):
                     print("Can't get position")
                     continue
-                file.write(str(x) + ',' + str(y) + ',' + '0.0' + ',' + '0.0,' + '0.0,' + '1.0,' + '5.92660023892e-08' + '\n')
+                file.write(str(x) + ',' + str(y) + ',' + '0.0,' + '0.0,' + '0.0,' + '1.0,' + '5.92660023892e-08' + '\n')
             rospy.loginfo('poses written to '+ output_file_path)
         
         rospy.sleep(1)
 
         # Start Move Plan
         start_journey_pub.publish(Empty())
+
+if __name__ == "__main__":
+    main()

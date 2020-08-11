@@ -25,7 +25,7 @@ find_package(catkin REQUIRED COMPONENTS
 ################################################################################
 # Setup for python modules and scripts
 ################################################################################
-# catkin_python_setup()
+catkin_python_setup()
 
 ################################################################################
 # Declare ROS messages, services and actions
@@ -63,7 +63,7 @@ include_directories(
 # )
 
 catkin_install_python(PROGRAMS
-  src/map_router.py
+  nodes/map_router
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
