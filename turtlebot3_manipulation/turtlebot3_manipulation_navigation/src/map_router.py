@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 import rospy
 from std_msgs.msg import Empty
-from geometry_msgs.msg import PoseWithCovarianceStamped
+from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray
 import rospkg
 
 import sys, select
@@ -48,6 +48,8 @@ Example: A5
 e = """
 Communications Failed
 """
+
+past_line = None
 
 # utility: priority queue
 class Pq:
@@ -95,6 +97,7 @@ class Map:
         self.map_data = None
         self.connection_data = None
         self.g = None
+        
         # Load json file (./map.json)
         with path.open() as json_stream:
             self.graph_data, self.map_data, self.connection_data = json.load(json_stream)
@@ -164,7 +167,7 @@ class Map:
             current = pi[current]
             
         if s not in path:
-            return 'unable to find shortest path staring from "{}" to "{}"'.format(s, t)
+            return None
         #print(path)
         #return f'{" > ".join(path)}'
         return path
@@ -173,39 +176,73 @@ class Map:
     def getPos(self, node_name):
         for m in self.map_data:
             if (node_name == m[0]):
-                return m[1], m[2]
-        return None, None
+                return m[0], m[1], m[2]
+        return None, None, None
+    def getNearestNode(self):
+        
+        shortest_dist = -1
+        nearest_node = None
+        for m in self.map_data:
+            dist = math.sqrt((m[1]-x)**2 + (m[2]-y)**2)
+            if dist < shortest_dist or shortest_dist == -1:
+                shortest_dist = dist
+                nearest_node = m[0]
+        return nearest_node
+
+
+def convert_PoseWithCovArray_to_PoseArray(waypoints):
+    """Used to publish waypoints as pose array so that you can see them in rviz, etc."""
+    poses = PoseArray()
+    poses.header.frame_id = rospy.get_param('~goal_frame_id','map')
+    poses.poses = [pose.pose.pose for pose in waypoints]
+    return poses
 
 if __name__ == "__main__":
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
     
     # Map Instance
+    print("Map Instance")
     m = Map()
     
     # init ROS node
     rospy.init_node('map_router')
 
     # Publishers
-    path_ready_pub = rospy.Publisher('/path_ready', std_msgs.Empty, queue_size=10)
-    path_reset_pub = rospy.Publisher('/path_reset', std_msgs.Empty, queue_size=10)
-    waypoints_pub  = rospy.Publisher('/waypoints', geometry_msgs.PoseWithCovarianceStamped, queue_size=10)
+    path_ready_pub = rospy.Publisher('/path_ready', Empty, queue_size=10)
+    path_reset_pub = rospy.Publisher('/path_reset', Empty, queue_size=10)
+    start_journey_pub = rospy.Publisher('/start_journey', Empty, queue_size=1)
+    waypoints_pub  = rospy.Publisher('/waypoints', PoseWithCovarianceStamped, queue_size=1)
     
     current_pos = "A0"
+    goal_pos = "A6"
+    #waypoints = []
 
-    try:
-        while(True):
-            path_reset_pub.publish()
-            goal_pos = input(input_text)
-
-            path_buf = m.shortest_path(current_pos, goal_pos)
-            for p in path_buf:
-                pose_buf = PoseWithCovarianceStamped()
-                pose_buf.header.frame_id = "map"
-                pose_buf.pose.pose.position.x, pose_buf.pose.pose.position.y = getPos(p)
-                waypoints_pub.publish(pose_buf)
-
-            current_pos = goal_pos
-            path_ready_pub.publish()
-    except:
-        print()
+    # Initialize Path Queue
+    #waypoints_pub.publish()
+    path_reset_pub.publish(Empty())
+    while(True):
+        #path_reset_pub.publish(Empty())
+        print(input_text)
+        goal_pos = raw_input()
+        
+        print("GOAL:{}".format(goal_pos))
+        path_buf = m.shortest_path(current_pos, goal_pos)
+        if(path_buf == None):
+            print("NO ROUTE")
+            exit()
+        print(path_buf)
+        with open(output_file_path, 'w') as file:
+            for i, p in enumerate(path_buf):
+                _, x, y = m.getPos(p)   # node, x, y
+                if i+1 < len(path_buf) and p[0] == path_buf[i+1][0]:
+                    continue
+                if(x == None or y == None):
+                    print("Can't get position")
+                    continue
+                file.write(str(x) + ',' + str(y) + ',' + '0.0' + ',' + '0.0,' + '0.0,' + '1.0,' + '5.92660023892e-08' + '\n')
+            rospy.loginfo('poses written to '+ output_file_path)
+        #waypoints_pub.publish(convert_PoseWithCovArray_to_PoseArray(waypoints))
+        current_pos = goal_pos
+        rospy.sleep(1)
+        start_journey_pub.publish(Empty())
