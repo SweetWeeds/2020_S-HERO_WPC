@@ -1,5 +1,0 @@
-uint32 node_index
-string rigid_body_name
-geometry_msgs/Point local_pivot
-bool disable_collision_between_linked_bodies
-float32 influence

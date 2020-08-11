@@ -1,6 +1,0 @@
-# rotate point and direction in frame_id frame to sim world space
-string frame_id
-string name
-string topic_name
-bullet_server/Line[] lines
----

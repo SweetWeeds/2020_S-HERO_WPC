@@ -17,12 +17,12 @@
       <material name="grey"/>
     </visual>
 
-    <collision>
+    <!-- collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://turtlebot3_manipulation_description/meshes/chain_link1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-    </collision>
+    </collision -->
 
      <inertial>
       <origin xyz="3.0876154e-04 0.0000000e+00 -1.2176461e-04" />
@@ -52,12 +52,12 @@
       <material name="grey"/>
     </visual>
 
-    <collision>
+    <!-- collision>
       <origin xyz="0 0 0.018" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://turtlebot3_manipulation_description/meshes/chain_link2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-    </collision>
+    </collision -->
 
      <inertial>
       <origin xyz="-3.0184870e-04 5.4043684e-04 ${0.018 + 2.9433464e-02}" />
@@ -87,12 +87,12 @@
       <material name="grey"/>
     </visual>
 
-    <collision>
+    <!-- collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://turtlebot3_manipulation_description/meshes/chain_link3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-    </collision>
+    </collision -->
 
      <inertial>
       <origin xyz="1.0308393e-02 3.7743363e-04 1.0170197e-01" />
