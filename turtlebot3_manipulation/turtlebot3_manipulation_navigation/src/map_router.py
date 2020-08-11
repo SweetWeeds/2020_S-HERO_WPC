@@ -7,8 +7,19 @@ from heapq import heapify, heappush, heappop
 import json
 from pathlib import Path
 import rospy
-import actionlib
-#from std_msgs.msg import String
+from std_msgs.msg import Empty
+from geometry_msgs.msg import PoseWithCovarianceStamped
+import rospkg
+
+import sys, select
+if os.name == 'nt':
+  import msvcrt
+else:
+  import tty, termios
+
+output_file_path = rospkg.RosPack().get_path('follow_waypoints')+"/saved_path/pose.csv"
+waypoints = []
+
 #from std_srvs.srv import Trigger, TriggerResponse
 #from geometry_msgs.msg import PointStamped
 
@@ -28,6 +39,15 @@ import actionlib
 #     ]
 # ]
 #
+
+input_text = """
+Please Input Waypoint.
+Example: A5
+"""
+
+e = """
+Communications Failed
+"""
 
 # utility: priority queue
 class Pq:
@@ -144,18 +164,48 @@ class Map:
             current = pi[current]
             
         if s not in path:
-            #return f'unable to find shortest path staring from "{s}" to "{t}"'
             return 'unable to find shortest path staring from "{}" to "{}"'.format(s, t)
         #print(path)
         #return f'{" > ".join(path)}'
         return path
 
+    # Get Position
+    def getPos(self, node_name):
+        for m in self.map_data:
+            if (node_name == m[0]):
+                return m[1], m[2]
+        return None, None
 
 if __name__ == "__main__":
+    if os.name != 'nt':
+        settings = termios.tcgetattr(sys.stdin)
+    
+    # Map Instance
     m = Map()
+    
     # init ROS node
     rospy.init_node('map_router')
-    
+
     # Publishers
-    waypoint_pub = rospy.Service('waypoint/', PointStamped, )
-    #print( m.shortest_path('B1', 'A20') )
+    path_ready_pub = rospy.Publisher('/path_ready', std_msgs.Empty, queue_size=10)
+    path_reset_pub = rospy.Publisher('/path_reset', std_msgs.Empty, queue_size=10)
+    waypoints_pub  = rospy.Publisher('/waypoints', geometry_msgs.PoseWithCovarianceStamped, queue_size=10)
+    
+    current_pos = "A0"
+
+    try:
+        while(True):
+            path_reset_pub.publish()
+            goal_pos = input(input_text)
+
+            path_buf = m.shortest_path(current_pos, goal_pos)
+            for p in path_buf:
+                pose_buf = PoseWithCovarianceStamped()
+                pose_buf.header.frame_id = "map"
+                pose_buf.pose.pose.position.x, pose_buf.pose.pose.position.y = getPos(p)
+                waypoints_pub.publish(pose_buf)
+
+            current_pos = goal_pos
+            path_ready_pub.publish()
+    except:
+        print()
