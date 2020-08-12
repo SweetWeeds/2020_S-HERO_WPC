@@ -97,6 +97,27 @@
         </collision>
       </link>
     </model>
+    
+    <model name="BMW_X3">
+      <static>true</static>
+      <link name="BMW_X3_link">
+        <visual name="BMW_X3_visual">
+          <origin xyz="0 0 0" rpy="0 0 ${pi/2}"/>
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <mesh><uri>model://cars/BMW_X3/BMW_X3.dae</uri></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="BMW_X3_collision">
+          <origin xyz="0 0 0" rpy="0 0 ${pi/2}"/>
+          <geometry>
+            <mesh><uri>model://cars/BMW_X3/BMW_X3.dae</uri></mesh>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
     <scene>
       <ambient>0.4 0.4 0.4 1</ambient>
       <background>0.7 0.7 0.7 1</background>

@@ -177,6 +177,8 @@ class Map:
             if (node_name == m[0]):
                 return m[0], m[1], m[2]
         return None, None, None
+    
+    # Get Nearest Node
     def getNearestNode(self):
         data = rospy.wait_for_message('/amcl_pose', PoseWithCovarianceStamped)
         x = data.pose.pose.position.x
