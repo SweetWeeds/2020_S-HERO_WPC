@@ -7,7 +7,7 @@ from heapq import heapify, heappush, heappop
 import json
 from pathlib import Path
 import rospy
-from std_msgs.msg import Empty
+from std_msgs.msg import Empty, String
 from actionlib_msgs.msg import GoalID
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray
 import rospkg
@@ -50,6 +50,8 @@ Communications Failed
 """
 
 past_line = None
+
+past_path_buf = []
 
 # utility: priority queue
 class Pq:
@@ -190,6 +192,70 @@ class Map:
                 nearest_node = m[0]
         return nearest_node
 
+
+
+def launch():
+    def goal_callback(data):
+        # Set Goal Point
+        #print(input_text)
+        #goal_pos = raw_input()
+        goal_pos = data.data
+
+        # Cancel Current Move Plan
+        cancel_pub.publish(GoalID(stamp=rospy.Time.from_sec(0.0), id=""))
+        cancel_pub.publish(GoalID(stamp=rospy.Time.from_sec(0.0), id=""))
+        
+        print("GOAL:{}".format(goal_pos))
+        
+        # Get Shortest Route
+        path_buf = m.shortest_path(goal_pos)
+        if(path_buf == None):
+            print("NO ROUTE")
+            exit()
+        print(path_buf)
+
+        # Write Route to csv file.
+        with open(output_file_path, 'w') as file:
+            for i, p in enumerate(path_buf):
+                _, x, y = m.getPos(p)   # node, x, y
+                if i+1 < len(path_buf) and p[0] == path_buf[i+1][0] and i != 0:
+                    continue
+                if(x == None or y == None):
+                    print("Can't get position")
+                    continue
+                file.write(str(x) + ',' + str(y) + ',' + '0.0,' + '0.0,' + '0.0,' + '1.0,' + '5.92660023892e-08' + '\n')
+            rospy.loginfo('poses written to '+ output_file_path)
+        
+        rospy.sleep(1)
+
+        # Start Move Plan
+        start_journey_pub.publish(Empty())
+    # end of goal_callback
+
+    if os.name != 'nt':
+        settings = termios.tcgetattr(sys.stdin)
+    
+    # Map Instance
+    print("Map Instance. MODE: Launch")
+    m = Map()
+    
+    # init ROS node
+    rospy.init_node('map_router')
+
+    # Publishers
+    path_ready_pub = rospy.Publisher('/path_ready', Empty, queue_size=10)
+    path_reset_pub = rospy.Publisher('/path_reset', Empty, queue_size=10)
+    start_journey_pub = rospy.Publisher('/start_journey', Empty, queue_size=1)
+    waypoints_pub  = rospy.Publisher('/waypoints', PoseWithCovarianceStamped, queue_size=10)
+    cancel_pub = rospy.Publisher('/move_base/cancel', GoalID, queue_size=1)
+
+    # Subscribers
+    goal_sub = rospy.Subscriber('/goal', String, goal_callback)
+
+    path_reset_pub.publish(Empty())
+
+    rospy.spin()
+
 def main():
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
@@ -246,4 +312,4 @@ def main():
         start_journey_pub.publish(Empty())
 
 if __name__ == "__main__":
-    main()
+    launch()
