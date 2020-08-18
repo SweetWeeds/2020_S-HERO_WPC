@@ -65,6 +65,12 @@
       </link>
     </model>
 
+    <actor name="actor">
+      <skin>
+        <filename>walk.dae</filename>
+      </skin>
+    </actor>
+
     <model name="parking_lot_with_floor">
       <static>true</static>
       <link name="parking_lot_with_floor_link">

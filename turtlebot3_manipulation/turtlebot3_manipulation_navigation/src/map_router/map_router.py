@@ -193,17 +193,19 @@ class Map:
         return nearest_node
 
 
-
+# Function for map_router.launch
 def launch():
+    counter = 0
     def goal_callback(data):
-        # Set Goal Point
-        #print(input_text)
-        #goal_pos = raw_input()
+        global counter
+
         goal_pos = data.data
 
         # Cancel Current Move Plan
-        cancel_pub.publish(GoalID(stamp=rospy.Time.from_sec(0.0), id=""))
-        cancel_pub.publish(GoalID(stamp=rospy.Time.from_sec(0.0), id=""))
+        for i in range(counter):
+            cancel_pub.publish(GoalID(stamp=rospy.Time.from_sec(0.0), id=""))
+        
+        counter = 0
         
         print("GOAL:{}".format(goal_pos))
         
@@ -223,6 +225,7 @@ def launch():
                 if(x == None or y == None):
                     print("Can't get position")
                     continue
+                counter += 1
                 file.write(str(x) + ',' + str(y) + ',' + '0.0,' + '0.0,' + '0.0,' + '1.0,' + '5.92660023892e-08' + '\n')
             rospy.loginfo('poses written to '+ output_file_path)
         
@@ -256,12 +259,13 @@ def launch():
 
     rospy.spin()
 
+# Function for stand alone execution
 def main():
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
     
     # Map Instance
-    print("Map Instance")
+    print("Map Instance, MODE: main")
     m = Map()
     
     # init ROS node
