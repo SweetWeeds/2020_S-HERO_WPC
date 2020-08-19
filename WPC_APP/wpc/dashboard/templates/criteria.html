@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% load extra_filter %}
+{% block title %}안전 Hat - 장비정보 - {% endblock %}
+  <!-- Custom styles for this page -->
+  <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% block content %}
+<div class="container">
+<div class="card">
+    <div class="card-body card shadow mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form>
+                          <div class="form-group row">
+                            <label  class="col-4 col-form-label">"최대 측정값 설정!!!"</label> 
+                          </div>
+                          <div class="form-group row">
+                            <label for="username" class="col-4 col-form-label">온도 최저: -30도</label> 
+                          </div>
+                          <div class="form-group row">
+                            <label for="device_id" class="col-4 col-form-label">온도 최고: 50도</label> 
+                            
+                          </div>
+                          <div class="form-group row">
+                            <label for="employee_id" class="col-4 col-form-label">TVOC: 1200</label> 
+                            
+                          </div>
+                          <div class="form-group row">
+                            <label for="job_pos" class="col-4 col-form-label">CO2: 10000</label> 
+                            
+                          </div>
+                          <div class="form-group row">
+                            <label for="phone_num" class="col-4 col-form-label">습도: 100</label> 
+                            
+                          </div>
+                          <div class="form-group row">
+                            <label for="publicinfo" class="col-4 col-form-label">Air Quality: 10</label> 
+                            
+                          </div> 
+                          <div class="form-group row">
+                            
+                          </div>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+</div>
+</div>
+</div>
+
+    
+
+
+{% endblock %}
+{% block javascript %}
+  <!-- Page level plugins -->
+  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+
+{% endblock %}

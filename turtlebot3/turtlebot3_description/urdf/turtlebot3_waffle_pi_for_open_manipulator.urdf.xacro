@@ -225,9 +225,9 @@
     </inertial>
   </link>
 
+  <!-- Main Camera -->
   <joint name="camera_joint" type="fixed">
-    <!-- origin xyz="0.073 -0.011 0.084" rpy="0 0 0"/ -->
-    <origin xyz="0.045 0.0 0.009" rpy="0 0 0"/>
+    <origin xyz="0.045 0.0 0.009" rpy="0 -${pi/6} 0"/>
     <parent link="base_link"/>
     <child link="camera_link"/>
   </joint>
@@ -260,5 +260,78 @@
     <child link="camera_rgb_optical_frame"/>
   </joint>
   <link name="camera_rgb_optical_frame"/>
+
+  <!-- Sub Camera 1 -->
+  <joint name="sub_camera_joint1" type="fixed">
+    <!-- origin xyz="0.045 0.0 0.009" rpy="0 0 0"/ -->
+    <origin xyz="-0.174 0.10 0.009" rpy="0 -${pi/6} ${pi}"/>
+    <parent link="base_link"/>
+    <child link="sub_camera_link1"/>
+  </joint>
+
+  <link name="sub_camera_link1">
+    <collision>
+      <origin xyz="0.005 0.0 0.013" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.015 0.030 0.027"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.005 0.0 0.013" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.015 0.030 0.027"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="sub_camera_rgb_joint1" type="fixed">
+    <origin xyz="0.003 0.011 0.009" rpy="0 0 0"/>
+    <parent link="sub_camera_link1"/>
+    <child link="sub_camera_rgb_frame1"/>
+  </joint>
+  <link name="sub_camera_rgb_frame1"/>
+
+  <joint name="sub_camera_rgb_optical_joint1" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+    <parent link="sub_camera_rgb_frame1"/>
+    <child link="sub_camera_rgb_optical_frame1"/>
+  </joint>
+  <link name="sub_camera_rgb_optical_frame1"/>
+
+  <!-- Sub Camera 2 -->
+    <joint name="sub_camera_joint2" type="fixed">
+    <origin xyz="-0.174 -0.10 0.009" rpy="0 -${pi/6} ${pi}"/>
+    <parent link="base_link"/>
+    <child link="sub_camera_link2"/>
+  </joint>
+
+  <link name="sub_camera_link2">
+    <collision>
+      <origin xyz="0.005 0.0 0.013" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.015 0.030 0.027"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.005 0.0 0.013" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.015 0.030 0.027"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="sub_camera_rgb_joint2" type="fixed">
+    <origin xyz="0.003 0.011 0.009" rpy="0 0 0"/>
+    <parent link="sub_camera_link2"/>
+    <child link="sub_camera_rgb_frame2"/>
+  </joint>
+  <link name="sub_camera_rgb_frame2"/>
+
+  <joint name="sub_camera_rgb_optical_joint2" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+    <parent link="sub_camera_rgb_frame2"/>
+    <child link="sub_camera_rgb_optical_frame2"/>
+  </joint>
+  <link name="sub_camera_rgb_optical_frame2"/>
 
 </robot>

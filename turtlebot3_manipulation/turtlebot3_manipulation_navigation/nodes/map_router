@@ -3,4 +3,4 @@
 from map_router import map_router
 
 if __name__ == '__main__':
-    map_router.main()
+    map_router.launch()
