@@ -10,3 +10,8 @@ sudo apt-get install ros-kinetic-joy ros-kinetic-teleop-twist-joy ros-kinetic-te
 ```
 
 ### Melodic: Deprecated
+
+### WPC_APP: Anaconda3(Python 3.7)
+```bash
+pip install django requests roslibpy
+```
