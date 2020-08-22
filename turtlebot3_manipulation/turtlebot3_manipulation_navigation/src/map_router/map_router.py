@@ -261,6 +261,7 @@ def launch():
 
 # Function for stand alone execution
 def main():
+    counter = 0
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
     
@@ -286,6 +287,13 @@ def main():
         goal_pos = raw_input()
 
         # Cancel Current Move Plan
+        print("Plan Counter:{}".format(counter))
+        for i in range(counter + 1):
+            cancel_pub.publish(GoalID(stamp=rospy.Time.from_sec(0.0), id=""))
+        
+        counter = 0
+
+        # Cancel Current Move Plan
         cancel_pub.publish(GoalID(stamp=rospy.Time.from_sec(0.0), id=""))
         cancel_pub.publish(GoalID(stamp=rospy.Time.from_sec(0.0), id=""))
         
@@ -307,6 +315,7 @@ def main():
                 if(x == None or y == None):
                     print("Can't get position")
                     continue
+                counter+=1
                 file.write(str(x) + ',' + str(y) + ',' + '0.0,' + '0.0,' + '0.0,' + '1.0,' + '5.92660023892e-08' + '\n')
             rospy.loginfo('poses written to '+ output_file_path)
         
@@ -316,4 +325,4 @@ def main():
         start_journey_pub.publish(Empty())
 
 if __name__ == "__main__":
-    launch()
+    main()
