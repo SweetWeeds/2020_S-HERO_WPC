@@ -1,0 +1,12 @@
+<launch>
+  <!-- arg name="stage" default="1"/ -->
+  <!-- param name="stage_number"  value="$(arg stage)"/ -->
+  <arg name="dist_tolerance"           default="0.1"/>
+
+  <node pkg="follow_waypoints" type="follow_waypoints" name="follow_waypoints" output="log" clear_params="true">
+    <param name="waypoint_distance_tolerance"              value="$(arg dist_tolerance)"/>
+    <param name="goal_frame_id" value="map"/>
+  </node>
+
+  <node pkg="turtlebot3_manipulation_navigation" type="map_router" name="map_router" output="screen" />
+</launch>
