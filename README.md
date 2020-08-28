@@ -10,7 +10,14 @@ sudo apt-get install ros-kinetic-joy ros-kinetic-teleop-twist-joy ros-kinetic-te
 ```
 
 ### Melodic: Deprecated
-
+### Gazebo 8 설치
+```bash
+sudo apt-get remove ros-kinetic-gazebo*
+sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install ros-kinetic-gazebo8*
+```
 ### WPC_APP: Anaconda3(Python 3.7)
 ```bash
 pip install django requests roslibpy
