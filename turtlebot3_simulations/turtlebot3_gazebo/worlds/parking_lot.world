@@ -102,7 +102,6 @@
       <static>true</static>
       <link name="car3_link">
         <visual name="car3_visual">
-          <origin xyz="0 2.4 0" rpy="0 0 89.55"/>
           <cast_shadows>false</cast_shadows>
           <geometry>
             <mesh><uri>model://cars/car3/car3.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
@@ -110,12 +109,12 @@
         </visual>
 
         <collision name="car3_collision">
-          <origin xyz="0 2.4 0" rpy="0 0 89.55"/>
           <geometry>
             <mesh><uri>model://cars/car3/car3.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
           </geometry>
         </collision>
       </link>
+      <pose frame=''>0 2.46999 0 0 0 -1.57673</pose>
     </model>
 
     <scene>
