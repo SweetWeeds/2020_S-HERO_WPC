@@ -4,6 +4,7 @@
   <xacro:arg name="camera_visual" default="false"/>
   <xacro:arg name="sub_camera_visual1" default="false"/>
   <xacro:arg name="sub_camera_visual2" default="false"/>
+  <xacro:arg name="manipulator_cam_visual" default="false"/>
   <xacro:arg name="imu_visual"    default="false"/>
 
   <gazebo reference="base_link">
@@ -236,6 +237,40 @@
         <updateRate>30.0</updateRate>
         <cameraName>sub_camera2</cameraName>
         <frameName>sub_camera_rgb_optical_frame2</frameName>
+        <imageTopicName>rgb/image_raw</imageTopicName>
+        <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- manipulator cam -->
+  <gazebo reference="manipulator_cam_rgb_frame">
+    <sensor type="camera" name="sub Pi Camera2">
+      <always_on>true</always_on>
+      <visualize>$(arg manipulator_cam_visual)</visualize>
+      <camera>
+          <horizontal_fov>1.085595</horizontal_fov>
+          <image>
+              <width>640</width>
+              <height>480</height>
+              <format>R8G8B8</format>
+          </image>
+          <clip>
+              <near>0.03</near>
+              <far>100</far>
+          </clip>
+      </camera>
+      <plugin name="manipulator_cam_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>30.0</updateRate>
+        <cameraName>manipulator_cam</cameraName>
+        <frameName>manipulator_cam_rgb_optical_frame</frameName>
         <imageTopicName>rgb/image_raw</imageTopicName>
         <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
         <hackBaseline>0.07</hackBaseline>

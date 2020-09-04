@@ -103,6 +103,235 @@
         </collision>
       </link>
     </model>
+
+    <model name="car1">
+      <static>true</static>
+      <link name="car1_link">
+        <visual name="car1_visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="car1_collision">
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </collision>
+      </link>
+      <pose frame=''>0 2.5 0 0 0 -1.57673</pose>
+    </model>
+
+    <model name="car2">
+      <static>true</static>
+      <link name="car2_link">
+        <visual name="car2_visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="car2_collision">
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </collision>
+      </link>
+      <pose frame=''>0 5 0 0 0 -1.57673</pose>
+    </model>
+
+    <model name="car3">
+      <static>true</static>
+      <link name="car3_link">
+        <visual name="car3_visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="car3_collision">
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </collision>
+      </link>
+      <pose frame=''>0 8.25 0 0 0 -1.57673</pose>
+    </model>
+
+    <model name="car4">
+      <static>true</static>
+      <link name="car4_link">
+        <visual name="car4_visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="car4_collision">
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </collision>
+      </link>
+      <pose frame=''>0 10.75 0 0 0 -1.57673</pose>
+    </model>
+
+    <model name="car5">
+      <static>true</static>
+      <link name="car5_link">
+        <visual name="car5_visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="car5_collision">
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </collision>
+      </link>
+      <pose frame=''>0 13.25 0 0 0 -1.57673</pose>
+    </model>
+
+    <model name="car6">
+      <static>true</static>
+      <link name="car6_link">
+        <visual name="car6_visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="car6_collision">
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </collision>
+      </link>
+      <pose frame=''>0 16.5 0 0 0 -1.57673</pose>
+    </model>
+
+    <model name="car7">
+      <static>true</static>
+      <link name="car7_link">
+        <visual name="car7_visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="car7_collision">
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </collision>
+      </link>
+      <pose frame=''>0 19.0 0 0 0 -1.57673</pose>
+    </model>
+
+    <model name="car8">
+      <static>true</static>
+      <link name="car8_link">
+        <visual name="car8_visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="car8_collision">
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </collision>
+      </link>
+      <pose frame=''>0 21.5 0 0 0 -1.57673</pose>
+    </model>
+
+    <model name="car9">
+      <static>true</static>
+      <link name="car9_link">
+        <visual name="car9_visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="car9_collision">
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </collision>
+      </link>
+      <pose frame=''>0 24.75 0 0 0 -1.57673</pose>
+    </model>
+
+    <model name="car10">
+      <static>true</static>
+      <link name="car10_link">
+        <visual name="car10_visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="car10_collision">
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </collision>
+      </link>
+      <pose frame=''>0 27.25 0 0 0 -1.57673</pose>
+    </model>
+
+    <model name="car11">
+      <static>true</static>
+      <link name="car11_link">
+        <visual name="car11_visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="car11_collision">
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </collision>
+      </link>
+      <pose frame=''>0 29.75 0 0 0 -1.57673</pose>
+    </model>
+
+    <model name="car12">
+      <static>true</static>
+      <link name="car12_link">
+        <visual name="car12_visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="car12_collision">
+          <geometry>
+            <mesh><uri>model://cars/car/car.dae</uri><scale>0.1 0.1 0.1</scale></mesh>
+          </geometry>
+        </collision>
+      </link>
+      <pose frame=''>0 33.0 0 0 0 -1.57673</pose>
+    </model>
+
     <scene>
       <ambient>0.4 0.4 0.4 1</ambient>
       <background>0.7 0.7 0.7 1</background>

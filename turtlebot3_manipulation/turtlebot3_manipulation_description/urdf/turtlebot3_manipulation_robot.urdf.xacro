@@ -14,4 +14,40 @@
     <child link="link1"/>
   </joint>
 
+  <!-- Manipulator Camera -->
+  <joint name="manipulator_cam_joint" type="fixed">
+    <origin xyz="-0.08 0 0.025" rpy="0 -${pi/2} ${pi}"/>
+    <parent link="link4"/>
+    <child link="manipulator_cam"/>
+  </joint>
+
+  <link name="manipulator_cam">
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.015 0.030 0.027"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.015 0.030 0.027"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="manipulator_cam_rgb_joint" type="fixed">
+    <origin xyz="0.003 0.011 0.009" rpy="0 0 0"/>
+    <parent link="manipulator_cam"/>
+    <child link="manipulator_cam_rgb_frame"/>
+  </joint>
+  <link name="manipulator_cam_rgb_frame"/>
+
+  <joint name="manipulator_cam_rgb_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+    <parent link="manipulator_cam_rgb_frame"/>
+    <child link="manipulator_cam_rgb_optical_frame"/>
+  </joint>
+  <link name="manipulator_cam_rgb_optical_frame"/>
+
 </robot>
