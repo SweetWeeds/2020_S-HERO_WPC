@@ -6,6 +6,6 @@ moveit_setup_assistant_config:
   SRDF:
     relative_path: config/turtlebot3_manipulation.srdf
   CONFIG:
-    author_name: Ryan Shim
-    author_email: jhshim@robotis.com
-    generated_timestamp: 1596106826
+    author_name: Kwon Han Kyul
+    author_email: khk4502@gmail.com
+    generated_timestamp: 1598783058
