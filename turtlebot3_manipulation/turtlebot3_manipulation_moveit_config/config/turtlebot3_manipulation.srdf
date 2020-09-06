@@ -10,12 +10,19 @@
     <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
     <group name="arm">
+        <link name="link1" />
+        <link name="link2" />
+        <link name="link3" />
+        <link name="link4" />
+        <link name="manipulator_cam" />
+        <link name="manipulator_cam_rgb_frame" />
+        <link name="manipulator_cam_rgb_optical_frame" />
         <joint name="joint1" />
         <joint name="joint2" />
         <joint name="joint3" />
     </group>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="plate" parent_link="link3" group="gripper" />
+    <end_effector name="plate" parent_link="link4" group="arm" />
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <virtual_joint name="virtual_joint" type="fixed" parent_frame="odom" child_link="base_footprint" />
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
@@ -26,6 +33,8 @@
     <disable_collisions link1="base2_link" link2="caster_back_right_link" reason="Never" />
     <disable_collisions link1="base2_link" link2="link1" reason="Never" />
     <disable_collisions link1="base2_link" link2="link2" reason="Never" />
+    <disable_collisions link1="base2_link" link2="sub_camera_link1" reason="Never" />
+    <disable_collisions link1="base2_link" link2="sub_camera_link2" reason="Never" />
     <disable_collisions link1="base2_link" link2="wheel_left_link" reason="Never" />
     <disable_collisions link1="base2_link" link2="wheel_right_link" reason="Never" />
     <disable_collisions link1="base_link" link2="base_scan" reason="Never" />
@@ -34,6 +43,8 @@
     <disable_collisions link1="base_link" link2="caster_back_right_link" reason="Adjacent" />
     <disable_collisions link1="base_link" link2="link1" reason="Adjacent" />
     <disable_collisions link1="base_link" link2="link2" reason="Never" />
+    <disable_collisions link1="base_link" link2="sub_camera_link1" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="sub_camera_link2" reason="Adjacent" />
     <disable_collisions link1="base_link" link2="wheel_left_link" reason="Adjacent" />
     <disable_collisions link1="base_link" link2="wheel_right_link" reason="Adjacent" />
     <disable_collisions link1="base_scan" link2="camera_link" reason="Never" />
@@ -41,6 +52,8 @@
     <disable_collisions link1="base_scan" link2="caster_back_right_link" reason="Never" />
     <disable_collisions link1="base_scan" link2="link1" reason="Never" />
     <disable_collisions link1="base_scan" link2="link2" reason="Never" />
+    <disable_collisions link1="base_scan" link2="sub_camera_link1" reason="Never" />
+    <disable_collisions link1="base_scan" link2="sub_camera_link2" reason="Never" />
     <disable_collisions link1="base_scan" link2="wheel_left_link" reason="Never" />
     <disable_collisions link1="base_scan" link2="wheel_right_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="caster_back_left_link" reason="Never" />
@@ -48,27 +61,46 @@
     <disable_collisions link1="camera_link" link2="link1" reason="Never" />
     <disable_collisions link1="camera_link" link2="link2" reason="Never" />
     <disable_collisions link1="camera_link" link2="link3" reason="Never" />
-    <disable_collisions link1="camera_link" link2="link4" reason="Never" />
+    <disable_collisions link1="camera_link" link2="manipulator_cam" reason="Never" />
+    <disable_collisions link1="camera_link" link2="sub_camera_link1" reason="Never" />
+    <disable_collisions link1="camera_link" link2="sub_camera_link2" reason="Never" />
     <disable_collisions link1="camera_link" link2="wheel_left_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="wheel_right_link" reason="Never" />
     <disable_collisions link1="caster_back_left_link" link2="caster_back_right_link" reason="Never" />
     <disable_collisions link1="caster_back_left_link" link2="link1" reason="Never" />
     <disable_collisions link1="caster_back_left_link" link2="link2" reason="Never" />
+    <disable_collisions link1="caster_back_left_link" link2="sub_camera_link1" reason="Never" />
+    <disable_collisions link1="caster_back_left_link" link2="sub_camera_link2" reason="Never" />
     <disable_collisions link1="caster_back_left_link" link2="wheel_left_link" reason="Never" />
     <disable_collisions link1="caster_back_left_link" link2="wheel_right_link" reason="Never" />
     <disable_collisions link1="caster_back_right_link" link2="link1" reason="Never" />
     <disable_collisions link1="caster_back_right_link" link2="link2" reason="Never" />
+    <disable_collisions link1="caster_back_right_link" link2="sub_camera_link1" reason="Never" />
+    <disable_collisions link1="caster_back_right_link" link2="sub_camera_link2" reason="Never" />
     <disable_collisions link1="caster_back_right_link" link2="wheel_left_link" reason="Never" />
     <disable_collisions link1="caster_back_right_link" link2="wheel_right_link" reason="Never" />
     <disable_collisions link1="link1" link2="link2" reason="Adjacent" />
+    <disable_collisions link1="link1" link2="manipulator_cam" reason="Never" />
+    <disable_collisions link1="link1" link2="sub_camera_link1" reason="Never" />
+    <disable_collisions link1="link1" link2="sub_camera_link2" reason="Never" />
     <disable_collisions link1="link1" link2="wheel_left_link" reason="Never" />
     <disable_collisions link1="link1" link2="wheel_right_link" reason="Never" />
     <disable_collisions link1="link2" link2="link3" reason="Adjacent" />
     <disable_collisions link1="link2" link2="link4" reason="Never" />
+    <disable_collisions link1="link2" link2="manipulator_cam" reason="Never" />
+    <disable_collisions link1="link2" link2="sub_camera_link1" reason="Never" />
+    <disable_collisions link1="link2" link2="sub_camera_link2" reason="Never" />
     <disable_collisions link1="link2" link2="wheel_left_link" reason="Never" />
     <disable_collisions link1="link2" link2="wheel_right_link" reason="Never" />
     <disable_collisions link1="link3" link2="link4" reason="Adjacent" />
+    <disable_collisions link1="link3" link2="manipulator_cam" reason="Never" />
     <disable_collisions link1="link3" link2="wheel_left_link" reason="Never" />
     <disable_collisions link1="link3" link2="wheel_right_link" reason="Never" />
+    <disable_collisions link1="link4" link2="manipulator_cam" reason="Adjacent" />
+    <disable_collisions link1="sub_camera_link1" link2="sub_camera_link2" reason="Never" />
+    <disable_collisions link1="sub_camera_link1" link2="wheel_left_link" reason="Never" />
+    <disable_collisions link1="sub_camera_link1" link2="wheel_right_link" reason="Never" />
+    <disable_collisions link1="sub_camera_link2" link2="wheel_left_link" reason="Never" />
+    <disable_collisions link1="sub_camera_link2" link2="wheel_right_link" reason="Never" />
     <disable_collisions link1="wheel_left_link" link2="wheel_right_link" reason="Never" />
 </robot>
