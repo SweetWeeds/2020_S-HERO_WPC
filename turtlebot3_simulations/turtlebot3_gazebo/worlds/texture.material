@@ -1,0 +1,13 @@
+material YourMaterialName{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture your_material_image.jpg
+                scale 1 1
+            }
+        }   
+    }
+}

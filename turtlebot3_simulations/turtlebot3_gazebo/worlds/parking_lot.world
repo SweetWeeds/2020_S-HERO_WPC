@@ -104,6 +104,21 @@
       </link>
     </model>
 
+    <model name="qr_box">
+      <static>true</static>
+      <link name="qr_box_link">
+        <visual name="qr_box_visual">
+          <origin xyz="3 0 0.5" rpy="0 0 0"/>
+          <geometry>
+            <box size="1 1 1"/>
+          </geometry>
+          <material>
+            
+          </material>
+        </visual>
+      </link>
+    </model>
+
     <model name="car1">
       <static>true</static>
       <link name="car1_link">
